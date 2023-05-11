@@ -13,4 +13,6 @@ Install the up-to-date version of this package using `remotes::install_github("w
   - For imports used more generally, use `usethis::use_import_from("pkg",
     "func")`, which will update the general documentation file
     `whotools-package.R`.
+  - Use the `#' @export` flag for functions that should be available to package
+    users.
 

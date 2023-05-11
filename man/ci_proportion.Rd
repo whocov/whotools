@@ -2,10 +2,16 @@
 % Please edit documentation in R/ci_proportion.R
 \name{ci_proportion}
 \alias{ci_proportion}
-\title{This function uses \code{binom.test} to derive estimates of the 95\% CI for
-proportions.}
+\title{This function uses \code{binom.test} to derive estimates of confidence intervals
+for proportions.}
 \usage{
-ci_proportion(k, n, conf = 0.95, result = c("both", "lower", "upper"))
+ci_proportion(
+  k,
+  n,
+  conf = 0.95,
+  result = c("both", "lower", "upper"),
+  drop = TRUE
+)
 }
 \arguments{
 \item{k}{number of successes}
@@ -16,11 +22,13 @@ ci_proportion(k, n, conf = 0.95, result = c("both", "lower", "upper"))
 
 \item{result}{a \code{character} vector indicating which bounds of the confidence
 interval to return: can be \code{"lower"}, or \code{"upper"}, or \code{"both"}}
+
+\item{drop}{Drop dimensions if possible by coercing to vector}
 }
 \description{
-This function uses \code{binom.test} to derive estimates of the 95\% CI for
-proportions.
+This function uses \code{binom.test} to derive estimates of confidence intervals
+for proportions.
 }
 \author{
-Thibaut Jombart, Finlay Campbell
+Thibaut Jombart, Finlay Campbell, Henry LS
 }
