@@ -1,6 +1,6 @@
 #' Change WHO region labels from long to short form and from region to office.
 #'
-#' @param region A character vector of regions in long or short form, as office
+#' @param label A character vector of regions in long or short form, as office
 #'   or region.
 #'
 #' @param output Should the output be provided as a region ("region"), office
@@ -24,7 +24,7 @@
 #'
 #' @export
 #'
-relabel_who <- function(region,
+relabel_who <- function(label,
                         output = c("keep", "region", "office"),
                         length = c("switch", "short", "long")) {
 
@@ -49,7 +49,7 @@ relabel_who <- function(region,
 
   ## match regions provided to index
   matched <- map_dfr(
-    region,
+    label,
     function(x) {
       mtch <- which(x == index, arr.ind = TRUE)
       if(length(mtch) == 0) tibble(place = NA, region = NA, short = NA)
@@ -72,11 +72,11 @@ relabel_who <- function(region,
   else if(length == "switch") matched$short <- !matched$short
 
   ## replace matched elements with correct output
-  region[!is.na(matched$place)] <- na.omit(index[matrix(
+  label[!is.na(matched$place)] <- na.omit(index[matrix(
     c(matched$place, ifelse(matched$region, 1, 3) + !matched$short),
     ncol = 2
   )])
 
-  return(region)
+  return(label)
 
 }
