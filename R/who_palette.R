@@ -53,4 +53,6 @@ who_palette <- function(type = c("qual1", "qual2", "qual3", "qual4", "binary1", 
     names(res) <- labels
   }
 
+  return(res)
+
 }
