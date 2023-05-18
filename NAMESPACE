@@ -2,6 +2,7 @@
 
 export(bin_numbers)
 export(ci_proportion)
+export(moving_average)
 export(perc_change)
 export(relabel_who)
 export(text_style)
@@ -12,4 +13,5 @@ import(purrr)
 importFrom(dplyr,case_when)
 importFrom(magrittr,"%<>%")
 importFrom(magrittr,"%>%")
+importFrom(slider,slide_index_dbl)
 importFrom(stringr,str_glue)
