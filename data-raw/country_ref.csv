@@ -1,0 +1,239 @@
+﻿country,who_region,iso2,iso3
+Afghanistan,EMRO,AF,AFG
+Albania,EURO,AL,ALB
+Algeria,AFRO,DZ,DZA
+American Samoa,WPRO,AS,ASM
+Andorra,EURO,AD,AND
+Angola,AFRO,AO,AGO
+Anguilla,AMRO,AI,AIA
+Antigua and Barbuda,AMRO,AG,ATG
+Argentina,AMRO,AR,ARG
+Armenia,EURO,AM,ARM
+Aruba,AMRO,AW,ABW
+Australia,WPRO,AU,AUS
+Austria,EURO,AT,AUT
+Azerbaijan,EURO,AZ,AZE
+Bahamas,AMRO,BS,BHS
+Bahrain,EMRO,BH,BHR
+Bangladesh,SEARO,BD,BGD
+Barbados,AMRO,BB,BRB
+Belarus,EURO,BY,BLR
+Belgium,EURO,BE,BEL
+Belize,AMRO,BZ,BLZ
+Benin,AFRO,BJ,BEN
+Bermuda,AMRO,BM,BMU
+Bhutan,SEARO,BT,BTN
+Bolivia (Plurinational State of),AMRO,BO,BOL
+Bonaire ,AMRO,XA,XAA
+"Bonaire, Sint Eustatius and Saba",AMRO,BQ,BES
+Bosnia and Herzegovina,EURO,BA,BIH
+Botswana,AFRO,BW,BWA
+Brazil,AMRO,BR,BRA
+British Virgin Islands,AMRO,VG,VGB
+Brunei Darussalam,WPRO,BN,BRN
+Bulgaria,EURO,BG,BGR
+Burkina Faso,AFRO,BF,BFA
+Burundi,AFRO,BI,BDI
+Cabo Verde,AFRO,CV,CPV
+Cambodia,WPRO,KH,KHM
+Cameroon,AFRO,CM,CMR
+Canada,AMRO,CA,CAN
+Cayman Islands,AMRO,KY,CYM
+Central African Republic,AFRO,CF,CAF
+Chad,AFRO,TD,TCD
+Chile,AMRO,CL,CHL
+China,WPRO,CN,CHN
+Colombia,AMRO,CO,COL
+Comoros,AFRO,KM,COM
+Congo,AFRO,CG,COG
+Cook Islands,WPRO,CK,COK
+Costa Rica,AMRO,CR,CRI
+Côte d’Ivoire,AFRO,CI,CIV
+Croatia,EURO,HR,HRV
+Cuba,AMRO,CU,CUB
+Curaçao,AMRO,CW,CUW
+Cyprus,EURO,CY,CYP
+Czechia,EURO,CZ,CZE
+Democratic People's Republic of Korea,SEARO,KP,PRK
+Democratic Republic of the Congo,AFRO,CD,COD
+Denmark,EURO,DK,DNK
+Djibouti,EMRO,DJ,DJI
+Dominica,AMRO,DM,DMA
+Dominican Republic,AMRO,DO,DOM
+Ecuador,AMRO,EC,ECU
+Egypt,EMRO,EG,EGY
+El Salvador,AMRO,SV,SLV
+Equatorial Guinea,AFRO,GQ,GNQ
+Eritrea,AFRO,ER,ERI
+Estonia,EURO,EE,EST
+Eswatini,AFRO,SZ,SWZ
+Ethiopia,AFRO,ET,ETH
+Falkland Islands (Malvinas),AMRO,FK,FLK
+Faroe Islands,EURO,FO,FRO
+Fiji,WPRO,FJ,FJI
+Finland,EURO,FI,FIN
+France,EURO,FR,FRA
+French Guiana,AMRO,GF,GUF
+French Polynesia,WPRO,PF,PYF
+Gabon,AFRO,GA,GAB
+Gambia,AFRO,GM,GMB
+Georgia,EURO,GE,GEO
+Germany,EURO,DE,DEU
+Ghana,AFRO,GH,GHA
+Gibraltar,EURO,GI,GIB
+Greece,EURO,GR,GRC
+Greenland,EURO,GL,GRL
+Grenada,AMRO,GD,GRD
+Guadeloupe,AMRO,GP,GLP
+Guam,WPRO,GU,GUM
+Guatemala,AMRO,GT,GTM
+Guernsey,EURO,GG,GGY
+Guinea,AFRO,GN,GIN
+Guinea-Bissau,AFRO,GW,GNB
+Guyana,AMRO,GY,GUY
+Haiti,AMRO,HT,HTI
+Holy See,EURO,VA,VAT
+Honduras,AMRO,HN,HND
+Hungary,EURO,HU,HUN
+Iceland,EURO,IS,ISL
+India,SEARO,IN,IND
+Indonesia,SEARO,ID,IDN
+Iran (Islamic Republic of),EMRO,IR,IRN
+Iraq,EMRO,IQ,IRQ
+Ireland,EURO,IE,IRL
+Isle of Man,EURO,IM,IMN
+Israel,EURO,IL,ISR
+Italy,EURO,IT,ITA
+Jamaica,AMRO,JM,JAM
+Japan,WPRO,JP,JPN
+Jersey,EURO,JE,JEY
+Jordan,EMRO,JO,JOR
+Kazakhstan,EURO,KZ,KAZ
+Kenya,AFRO,KE,KEN
+Kiribati,WPRO,KI,KIR
+Kosovo†,EURO,XK,XKX
+Kuwait,EMRO,KW,KWT
+Kyrgyzstan,EURO,KG,KGZ
+Lao People's Democratic Republic,WPRO,LA,LAO
+Latvia,EURO,LV,LVA
+Lebanon,EMRO,LB,LBN
+Lesotho,AFRO,LS,LSO
+Liberia,AFRO,LR,LBR
+Libya,EMRO,LY,LBY
+Liechtenstein,EURO,LI,LIE
+Lithuania,EURO,LT,LTU
+Luxembourg,EURO,LU,LUX
+Madagascar,AFRO,MG,MDG
+Malawi,AFRO,MW,MWI
+Malaysia,WPRO,MY,MYS
+Maldives,SEARO,MV,MDV
+Mali,AFRO,ML,MLI
+Malta,EURO,MT,MLT
+Marshall Islands,WPRO,MH,MHL
+Martinique,AMRO,MQ,MTQ
+Mauritania,AFRO,MR,MRT
+Mauritius,AFRO,MU,MUS
+Mayotte,AFRO,YT,MYT
+Mexico,AMRO,MX,MEX
+Micronesia (Federated States of),WPRO,FM,FSM
+Monaco,EURO,MC,MCO
+Mongolia,WPRO,MN,MNG
+Montenegro,EURO,ME,MNE
+Montserrat,AMRO,MS,MSR
+Morocco,EMRO,MA,MAR
+Mozambique,AFRO,MZ,MOZ
+Myanmar,SEARO,MM,MMR
+Namibia,AFRO,NA,NAM
+Nauru,WPRO,NR,NRU
+Nepal,SEARO,NP,NPL
+Netherlands,EURO,NL,NLD
+New Caledonia,WPRO,NC,NCL
+New Zealand,WPRO,NZ,NZL
+Nicaragua,AMRO,NI,NIC
+Niger,AFRO,NE,NER
+Nigeria,AFRO,NG,NGA
+Niue,WPRO,NU,NIU
+North Macedonia,EURO,MK,MKD
+Northern Mariana Islands (Commonwealth of the),WPRO,MP,MNP
+Norway,EURO,NO,NOR
+occupied Palestinian territory,EMRO,PS,PSE
+Oman,EMRO,OM,OMN
+Pakistan,EMRO,PK,PAK
+Palau,WPRO,PW,PLW
+Panama,AMRO,PA,PAN
+Papua New Guinea,WPRO,PG,PNG
+Paraguay,AMRO,PY,PRY
+Peru,AMRO,PE,PER
+Philippines,WPRO,PH,PHL
+Pitcairn Islands,WPRO,PN,PCN
+Poland,EURO,PL,POL
+Portugal,EURO,PT,PRT
+Puerto Rico,AMRO,PR,PRI
+Qatar,EMRO,QA,QAT
+Republic of Korea,WPRO,KR,KOR
+Republic of Moldova,EURO,MD,MDA
+Réunion,AFRO,RE,REU
+Romania,EURO,RO,ROU
+Russian Federation,EURO,RU,RUS
+Rwanda,AFRO,RW,RWA
+Saba,AMRO,XC,XCA
+Saint Barthélemy,AMRO,BL,BLM
+Saint Helena,AFRO,SH,SHN
+Saint Kitts and Nevis,AMRO,KN,KNA
+Saint Lucia,AMRO,LC,LCA
+Saint Martin,AMRO,MF,MAF
+Saint Pierre and Miquelon,AMRO,PM,SPM
+Saint Vincent and the Grenadines,AMRO,VC,VCT
+Samoa,WPRO,WS,WSM
+San Marino,EURO,SM,SMR
+Sao Tome and Principe,AFRO,ST,STP
+Saudi Arabia,EMRO,SA,SAU
+Senegal,AFRO,SN,SEN
+Serbia,EURO,RS,SRB
+Seychelles,AFRO,SC,SYC
+Sierra Leone,AFRO,SL,SLE
+Singapore,WPRO,SG,SGP
+Sint Eustatius,AMRO,XB,XBA
+Sint Maarten,AMRO,SX,SXM
+Slovakia,EURO,SK,SVK
+Slovenia,EURO,SI,SVN
+Solomon Islands,WPRO,SB,SLB
+Somalia,EMRO,SO,SOM
+South Africa,AFRO,ZA,ZAF
+South Sudan,AFRO,SS,SSD
+Spain,EURO,ES,ESP
+Sri Lanka,SEARO,LK,LKA
+Sudan,EMRO,SD,SDN
+Suriname,AMRO,SR,SUR
+Sweden,EURO,SE,SWE
+Switzerland,EURO,CH,CHE
+Syrian Arab Republic,EMRO,SY,SYR
+Tajikistan,EURO,TJ,TJK
+Thailand,SEARO,TH,THA
+The United Kingdom,EURO,GB,GBR
+Timor-Leste,SEARO,TL,TLS
+Togo,AFRO,TG,TGO
+Tokelau,WPRO,TK,TKL
+Tonga,WPRO,TO,TON
+Trinidad and Tobago,AMRO,TT,TTO
+Tunisia,EMRO,TN,TUN
+Türkiye,EURO,TR,TUR
+Turkmenistan,EURO,TM,TKM
+Turks and Caicos Islands,AMRO,TC,TCA
+Tuvalu,WPRO,TV,TUV
+Uganda,AFRO,UG,UGA
+Ukraine,EURO,UA,UKR
+United Arab Emirates,EMRO,AE,ARE
+United Republic of Tanzania,AFRO,TZ,TZA
+United States of America,AMRO,US,USA
+United States Virgin Islands,AMRO,VI,VIR
+Uruguay,AMRO,UY,URY
+Uzbekistan,EURO,UZ,UZB
+Vanuatu,WPRO,VU,VUT
+Venezuela (Bolivarian Republic of),AMRO,VE,VEN
+Viet Nam,WPRO,VN,VNM
+Wallis and Futuna,WPRO,WF,WLF
+Western Sahara,AFRO,EH,ESH
+Yemen,EMRO,YE,YEM
+Zambia,AFRO,ZM,ZMB
+Zimbabwe,AFRO,ZW,ZWE
