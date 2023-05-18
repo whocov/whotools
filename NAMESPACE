@@ -3,7 +3,6 @@
 export(ci_proportion)
 export(relabel_who)
 export(vis_agg_epicurve)
+import(purrr)
 importFrom(magrittr,"%<>%")
 importFrom(magrittr,"%>%")
-importFrom(purrr,map2)
-importFrom(purrr,map2_dbl)

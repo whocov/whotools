@@ -33,7 +33,7 @@ ci_proportion <- function(k, n,
     return(out[result])
   }
 
-  out <- purrr::map2_dfr(k, n, get_ci, conf, result)
+  out <- map2_dfr(k, n, get_ci, conf, result)
 
   if(drop && (nrow(out) == 1 || ncol(out) == 1)) out <- unlist(out)
 

@@ -28,11 +28,12 @@ relabel_who <- function(label,
                         output = c("keep", "region", "office"),
                         length = c("switch", "short", "long")) {
 
+  ## check arguments
   output <- match.arg(output)
   length <- match.arg(length)
 
   ## match region and office labels in short and long form
-  index <- as.matrix(tibble(
+  index <- as.matrix(data.frame(
     region_short = c("AFR", "EUR", "EMR", "PAH", "AMR", "SEAR", "WPR"),
     region_long = c("African Region", "European Region",
                     "Eastern Mediterranean Region", "Region of the Americas",
@@ -52,8 +53,8 @@ relabel_who <- function(label,
     label,
     function(x) {
       mtch <- which(x == index, arr.ind = TRUE)
-      if(length(mtch) == 0) tibble(place = NA, region = NA, short = NA)
-      else tibble(
+      if(length(mtch) == 0) data.frame(place = NA, region = NA, short = NA)
+      else data.frame(
         ## row of the index indicating the place
         place = mtch[1,1],
         ## is it provided as a region (as opposed to office)
