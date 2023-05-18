@@ -48,8 +48,8 @@ relabel_who <- function(label,
                     "Regional Office for the Western Pacific")
   ))
 
-  ## match regions provided to index
-  matched <- map_dfr(
+  ## get properties of label provided
+  properties <- map_dfr(
     label,
     function(x) {
       mtch <- which(x == index, arr.ind = TRUE)
@@ -66,15 +66,15 @@ relabel_who <- function(label,
   )
 
   ## change output according to arguments provided
-  if(output == "region") matched$region <- TRUE
-  else if(output == "office") matched$region <- FALSE
-  if(length == "short") matched$short <- TRUE
-  else if(length == "long") matched$short <- FALSE
-  else if(length == "switch") matched$short <- !matched$short
+  if(output == "region") properties$region <- TRUE
+  else if(output == "office") properties$region <- FALSE
+  if(length == "short") properties$short <- TRUE
+  else if(length == "long") properties$short <- FALSE
+  else if(length == "switch") properties$short <- !properties$short
 
-  ## replace matched elements with correct output
-  label[!is.na(matched$place)] <- na.omit(index[matrix(
-    c(matched$place, ifelse(matched$region, 1, 3) + !matched$short),
+  ## replace matching labels  with modified output
+  label[!is.na(properties$place)] <- na.omit(index[matrix(
+    c(properties$place, ifelse(properties$region, 1, 3) + !properties$short),
     ncol = 2
   )])
 
