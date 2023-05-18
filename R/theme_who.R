@@ -1,5 +1,4 @@
-#' @details
-#' a general epi curve theme for mpx
+#' a general ggplot2 theme for use across products
 #'
 #' @param base_size the base size of text in the plot
 #'
