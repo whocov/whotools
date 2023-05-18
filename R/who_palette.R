@@ -8,7 +8,7 @@
 #' @param n optional - the number of colours to output. By default, the maximum in the palette is used.
 #' Most useful for change palettes, where the difference between colour grades will increase as n decreases.
 #'
-#' @importFrom RcolorBrewer brewerpal
+#' @importFrom RColorBrewer brewer.pal
 #'
 #' @author HLS
 #'
@@ -44,8 +44,8 @@ who_palette <- function(type = c("qual1", "qual2", "qual3", "qual4", "binary1", 
                  "SEARO"  = "#a6d854",
                  "WPRO"   = "#e5c494",
                  "OTHER"  = "lightgrey"),
-    "change1" = suppressWarnings(RcolorBrewer::brewerpal(n, "RdYlBu")),
-    "change2" = suppressWarnings(RcolorBrewer::brewerpal(n, "RdYlGn"))
+    "change1" = suppressWarnings(RColorBrewer::brewer.pal(n, "RdYlBu")),
+    "change2" = suppressWarnings(RColorBrewer::brewer.pal(n, "RdYlGn"))
   )
 
   if (!is.null(labels)) {
