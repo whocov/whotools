@@ -10,10 +10,9 @@
 
 
 
-perc_change <- function(new_val, old_val)
+perc_change <- function(new_val, old_val) {
 
-{
-  change <- case_when(
+  case_when(
     is.na(new_val) | new_val == 0 & (is.na(old_val) | old_val == 0) ~ NA_real_,
     old_val > 0 & new_val == 0 ~ NA_real_,
     new_val > 0 & old_val == 0 ~ NA_real_,
@@ -23,5 +22,4 @@ perc_change <- function(new_val, old_val)
     TRUE ~ new_val/old_val - 1
   )
 
-  return(change)
 }

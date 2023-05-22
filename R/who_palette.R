@@ -14,8 +14,6 @@
 #'
 #' @export
 #'
-
-
 who_palette <- function(type = c("qual1", "qual2", "qual3", "qual4", "binary1", "binary2",
                                  "who", "region", "change1", "change2"),
                          labels = NULL,
@@ -23,9 +21,7 @@ who_palette <- function(type = c("qual1", "qual2", "qual3", "qual4", "binary1", 
 
   type <- match.arg(type)
 
-  if (length(labels) > n) {
-    n <- length(labels)
-  }
+  if (length(labels) > n) n <- length(labels)
 
   res <- switch(
     type,
@@ -52,5 +48,7 @@ who_palette <- function(type = c("qual1", "qual2", "qual3", "qual4", "binary1", 
     res <- res[length(labels)]
     names(res) <- labels
   }
+
+  return(res)
 
 }

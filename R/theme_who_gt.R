@@ -1,4 +1,4 @@
-#' a general table theme for the `{gt}` packag
+#' A general table theme for the `{gt}` packag
 #'
 #' @param x a gt object
 #'
@@ -7,9 +7,9 @@
 #' @author HLS
 #'
 #' @export
-
-
+#'
 theme_who_gt <- function(x) {
+
   x %>%
     tab_style(
       style = list(
