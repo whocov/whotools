@@ -2,7 +2,7 @@
 % Please edit documentation in R/theme_who_gt.R
 \name{theme_who_gt}
 \alias{theme_who_gt}
-\title{a general table theme for the \code{{gt}} packag}
+\title{A general table theme for the \code{{gt}} packag}
 \usage{
 theme_who_gt(x)
 }
@@ -10,7 +10,7 @@ theme_who_gt(x)
 \item{x}{a gt object}
 }
 \description{
-a general table theme for the \code{{gt}} packag
+A general table theme for the \code{{gt}} packag
 }
 \author{
 HLS

@@ -2,8 +2,9 @@
 % Please edit documentation in R/moving_average.R
 \name{moving_average}
 \alias{moving_average}
-\title{function to apply a moving average to a numeric column. Use this function within \code{mutate()}
-Note that function requires data to be sorted by date. By default calculates a 7 day moving average.}
+\title{function to apply a moving average to a numeric column. Use this function
+within \code{mutate()} Note that function requires data to be sorted by date. By
+default calculates a 7 day moving average.}
 \usage{
 moving_average(val, date_val, before = 3, after = 3)
 }
@@ -25,6 +26,7 @@ moving_average(val, date_val, before = 3, after = 3)
 }}
 }
 \description{
-function to apply a moving average to a numeric column. Use this function within \code{mutate()}
-Note that function requires data to be sorted by date. By default calculates a 7 day moving average.
+function to apply a moving average to a numeric column. Use this function
+within \code{mutate()} Note that function requires data to be sorted by date. By
+default calculates a 7 day moving average.
 }

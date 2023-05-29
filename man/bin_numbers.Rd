@@ -2,7 +2,8 @@
 % Please edit documentation in R/bin_numbers.R
 \name{bin_numbers}
 \alias{bin_numbers}
-\title{This function extends \code{cut} functionality to allow for several labelling styles}
+\title{This function extends \code{cut} functionality to allow for several labelling
+styles}
 \usage{
 bin_numbers(
   x,
@@ -13,16 +14,18 @@ bin_numbers(
 \arguments{
 \item{x}{a \code{numeric} vector containing numbers to be binned}
 
-\item{breaks}{a numeric vector of breaks to be used for cut. There is no need to add Inf.
-For percentages, provide numbers as proportions.}
+\item{breaks}{a numeric vector of breaks to be used for cut. There is no need
+to add Inf.  For percentages, provide numbers as proportions.}
 
-\item{mode}{one of "int" (a vector of integer values, e.g. age, cases),
-"dbl" (a vector of floating point numbers with decimals e.g. attack rate),
-"pct" (a vector of percentages, expressed as decimals),
-or "pct_change" (a vector of percentages, specifically when showing percent change between two time points).}
+\item{mode}{one of "int" (a vector of integer values, e.g. age, cases), "dbl"
+(a vector of floating point numbers with decimals e.g. attack rate), "pct"
+(a vector of percentages, expressed as decimals), or "pct_change" (a vector
+of percentages, specifically when showing percent change between two time
+points).}
 }
 \description{
-This function extends \code{cut} functionality to allow for several labelling styles
+This function extends \code{cut} functionality to allow for several labelling
+styles
 }
 \author{
 HLS

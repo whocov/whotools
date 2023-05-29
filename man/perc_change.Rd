@@ -2,7 +2,8 @@
 % Please edit documentation in R/perc_change.R
 \name{perc_change}
 \alias{perc_change}
-\title{This function calculates percentage change between two values (i.e. for week on week change)}
+\title{This function calculates percentage change between two values (i.e. for week
+on week change)}
 \usage{
 perc_change(new_val, old_val)
 }
@@ -12,7 +13,8 @@ perc_change(new_val, old_val)
 \item{old_val}{the value further back in time}
 }
 \description{
-This function calculates percentage change between two values (i.e. for week on week change)
+This function calculates percentage change between two values (i.e. for week
+on week change)
 }
 \author{
 HLS
