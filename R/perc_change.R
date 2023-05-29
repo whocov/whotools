@@ -1,4 +1,5 @@
-#' This function calculates percentage change between two values (i.e. for week on week change)
+#' This function calculates percentage change between two values (i.e. for week
+#' on week change)
 #'
 #' @param new_val the value more recent in time
 #'
@@ -7,9 +8,7 @@
 #' @author HLS
 #'
 #' @export
-
-
-
+#'
 perc_change <- function(new_val, old_val) {
 
   case_when(

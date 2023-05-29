@@ -59,16 +59,14 @@ vis_agg_epicurve <- function(dat,
                              return_data = FALSE) {
 
   if (is.null(dat)) return(NULL)
-  if (!is.null(facet_by))
-    if (facet_by == "none") facet_by <- NULL
+  if (!is.null(facet_by)) if (facet_by == "none") facet_by <- NULL
 
-  if (is.null(start_date)) {
+  if (is.null(start_date))
     start_date <- min(dat %>% filter({{ var }} != 0) %>%  pull({{ date_var }}))
-  }
 
   dat <- dat %>%
-    mutate(who_region_long = long_whoreg(who_region)) %>%
-    filter(between({{ date_var }}, start_date, end_date)) %>%
+    mutate(who_region_long = relabel_who(who_region, length = "long")) %>%
+    filter(between(.[[date_var]], start_date, end_date)) %>%
     ungroup()
 
   if (nrow(dat) == 0) return(NULL)

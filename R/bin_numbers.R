@@ -1,4 +1,3 @@
-
 #' This function extends `cut` functionality to allow for several labelling
 #' styles
 #'
@@ -12,7 +11,6 @@
 #'   (a vector of percentages, expressed as decimals), or "pct_change" (a vector
 #'   of percentages, specifically when showing percent change between two time
 #'   points).
-#'
 #'
 #' @author HLS
 #'
@@ -34,15 +32,19 @@ bin_numbers <- function(x,
     "pct_change" = {breaks <- c(-Inf, breaks); labs <- pct_change_labs(breaks = breaks)}
   )
 
-  cut(x, breaks = breaks, labels = labs,
-      include.lowest = TRUE,
-      right = ifelse(mode == "int", FALSE, TRUE)
-      )
+  cut(
+    x, breaks = breaks, labels = labs,
+    include.lowest = TRUE,
+    right = mode != "int"
+  )
 
 }
 
 
 #' @noRd
+#'
+#' @importFrom stringr str_replace
+#'
 int_labs <- function(breaks, sep = "-") {
 
   v1 <- paste0(breaks)
@@ -53,11 +55,13 @@ int_labs <- function(breaks, sep = "-") {
     stringr::str_replace(paste0(sep, NA), "") %>%
     stringr::str_replace(paste0(sep, Inf), "+") %>%
     .[-length(.)]
+
 }
 
 
 
 #' @noRd
+#'
 dbl_labs <- function(breaks, sep = "-") {
 
   v2 <- dplyr::lead(breaks)
@@ -71,6 +75,7 @@ dbl_labs <- function(breaks, sep = "-") {
 
 
 #' @noRd
+#'
 pct_labs <- function(breaks, sep = "-") {
 
   breaks <- breaks * 100
@@ -86,6 +91,7 @@ pct_labs <- function(breaks, sep = "-") {
 
 
 #' @noRd
+#'
 pct_change_labs <- function(breaks, sep = "-") {
 
   v1 <- breaks * 100
@@ -102,4 +108,3 @@ pct_change_labs <- function(breaks, sep = "-") {
     .[-length(.)]
 
 }
-
