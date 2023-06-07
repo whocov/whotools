@@ -1,0 +1,216 @@
+---
+title: "An introduction to `whotools`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{An introduction to `whotools`}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 6.5,
+  fig.height = 4,
+  warning = FALSE
+)
+```
+
+## Overview
+
+`whotools` is intended as a lightweight package for facilitating analytics at
+WHO. The following vignette will cover some example use cases. We will use the
+example dataset `incidence`, containing daily reported cases and deaths for a
+given country:
+
+```{r setup}
+## load packages
+pacman::p_load(tidyverse, lubridate, glue, whotools, gt)
+
+## load example data from package
+incidence <- whotools:::incidence
+```
+
+## Themes
+
+`whotools` includes a theme that can be added to any ggplot2 object using the
+`theme_who()` function. In the example below we are visualising the daily case
+incidence curve with the WHO theme.
+
+```{r, theme_who}
+incidence %>%
+  ggplot(aes(date, cases)) +
+  geom_col(width = 1) +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.05))) +
+  labs(x = "Date", y = "Daily number of cases") +
+  theme_who()
+```
+
+## Palettes
+
+The `who_palette` function provides a number of palettes that can be applied in
+different scenarios and passed via the `scale_manual` option in ggplot2. In the
+section below, we simulate a gender distribution of cases between different
+places and plot the results using the `binary` palette.
+
+```{r, who_palette_binary}
+## simulate a random gender proportion for different places
+genders <- tibble(
+  prop_male = rbeta(10, 2, 3),
+  prop_female = 1 - prop_male,
+  sample = map(
+    prop_male,
+    ~ sample(c("male", "female"), 100, prob = c(.x, 1-.x), replace = TRUE)
+  ),
+  place = fct_reorder(glue("Place {LETTERS[1:10]}"), prop_male),
+)
+
+genders %>%
+  pivot_longer(-c(place, sample)) %>%
+  ggplot(aes(place, value, fill = name)) +
+  geom_col(position = "stack") +
+  scale_fill_manual(
+    ## use binary palette type
+    values = who_palette(type = "binary2"),
+    labels = c(prop_female = "Female", prop_male = "Male"),
+    name = NULL
+  ) +
+  scale_y_continuous(
+    expand = expansion(mult = c(0, 0)),
+    labels = scales::percent
+  ) +
+  labs(x = "Place", y = "Proportion") +
+  theme_who() +
+  theme(legend.position = "bottom")
+```
+
+## Region labels and palettes
+The `relabel_who` function helps convert regional offices labels between their
+abbreviated and full version (.e.g "EMRO" and "Regional Office for the Eastern
+Mediterranean") and between office and region designations (e.g. EMRO and
+EMR). Below we show average case incidence per region in a table, also using the
+`theme_who_gt` function, which applies a WHO theme to table outputs from the
+`gt` package.
+
+```{r, region_labels}
+cases_region <- tibble(
+  office = c("AFRO", "EURO", "EMRO", "PAHO", "SEARO", "WPRO"),
+  region = relabel_who(office, output = "region", length = "long"),
+  cases = round(runif(length(office), 20, 200), 1.1)
+)
+
+cases_region %>%
+  select(-office) %>%
+  gt() %>%
+  cols_label(cases = "Daily cases per 100,000 population", region = "Region") %>%
+  theme_who_gt()
+```
+
+We can also plot this in a bar chart and use the regional color palette from `who_palette`:
+
+```{r, region_palette}
+cases_region %>%
+  mutate(office = fct_reorder(office, cases)) %>%
+  ggplot(aes(office, cases, fill = office)) +
+  geom_col() +
+  scale_x_discrete(labels = ~ relabel_who(.x, output = "region", length = "short")) +
+  scale_fill_manual(values = who_palette(type = "region"), guide = "none") +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.05))) +
+  labs(x = "WHO Region", y = "Daily cases per 100,000 population") +
+  theme_who()
+```
+
+## Moving averages
+
+The `moving_average` function calculates a moving average across a specified
+date window. Below we add a line showing the average daily incidence over a
+sliding 7-day window.
+
+```{r, moving_average}
+incidence %>%
+  mutate(
+    cases_weekly = moving_average(val = cases, date_val = date, before = 3, after = 3),
+  ) %>%
+  ggplot(aes(x = date)) +
+  geom_col(aes(y = cases), width = 1) +
+  geom_line(aes(y = cases_weekly), size = 2, color = "black") +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.05))) +
+  labs(x = "Date", y = "Daily number of cases") +
+  theme_who()
+```
+
+## Percent changes
+
+The `perc_change` function will calculate percent changes. We can use this to
+visualise percent changes in weekly reported cases:
+
+```{r, perc_change}
+incidence %>%
+  group_by(week = isoweek(date)) %>%
+  filter(week < 30) %>%
+  summarise(cases = sum(cases)) %>%
+  mutate(change = 100*perc_change(cases, lag(cases))) %>%
+  pivot_longer(-week) %>%
+  ggplot(aes(week, value)) +
+  geom_col() +
+  facet_wrap(
+    ~ name,
+    ncol = 1,
+    scales = "free_y",
+    labeller = labeller(name = c(cases = "Weekly number\nof cases", change = "% change in\nweekly cases")),
+    strip.position = "left"
+  ) +
+  labs(x = "Calendar week", y = NULL) +
+  theme_who(strip.placement = "outside")
+```
+
+## Confidence intervals
+
+The function `ci_proportion` calculates confidence intervals for proportions. We
+can plot the gender proportion plot above in a different way to include
+confidence intervals using this function. 
+
+```{r, ci_proportion}
+genders %>%
+  mutate(
+    ci = ci_proportion(
+      ## calculate the number of individuals that are male
+      k = map_dbl(genders$sample, ~ sum(.x == "male")),
+      ## calculate the total number of individuals
+      n = lengths(genders$sample)
+    )
+  ) %>%
+  unnest_wider(ci) %>%
+  ggplot(aes(place, prop_male)) +
+  geom_errorbar(
+    aes(ymin = lower, ymax = upper),
+    width = 0.5
+  ) +
+  geom_point() +
+  scale_y_continuous(
+    limits = c(0, 1),
+    labels = scales::percent
+  ) +
+  labs(x = "Place", y = "Proportion male") +
+  theme_who()
+```
+
+## Binning numbers
+
+The `bin_numbers` function does exactly that, with the default binning set to
+WHO age categories. In the example below we bin a simulated distribution of
+ages and plot the distribution.
+
+```{r, bin_numbers}
+## example dataset of ages
+tibble(
+  age = rlnorm(100, log(30), log(2.5)),
+  binned = bin_numbers(age)
+) %>%
+  ggplot(aes(x = binned)) +
+  geom_bar() +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.05))) +
+  labs(x = "Age category", y = "Count") +
+  theme_who()
+```
