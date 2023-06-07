@@ -214,3 +214,35 @@ tibble(
   labs(x = "Age category", y = "Count") +
   theme_who()
 ```
+
+
+## Reference data
+
+The `ref_country` object contains a reference dataset for all countries. 
+This has official country names, who regions, and iso2 and 3 codes for all countries globally.
+Use this in joins to ensure official country names are used, and to append who region and iso codes to lists of countries. 
+
+```{r ref_country, echo=FALSE}
+
+knitr::kable(head(ref_country))
+
+```
+
+
+<br> 
+<br>
+
+One example of a use cases is as follows:
+
+```{r ref_country example}
+# joining with ref_country example
+tibble(
+  office_country = c("Switzerland", "Germany", "Denmark", "France",
+                     "Philippines", "Congo", "India", "Egypt", "United States of America")
+) %>% 
+  left_join(
+    ref_country, by = c("office_country" = "country")
+  ) %>% 
+  mutate(who_region_full = relabel_who(who_region, output = "office", length = "long")) %>% 
+  knitr::kable()
+```
