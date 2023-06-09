@@ -16,8 +16,8 @@ perc_change <- function(new_val, old_val) {
     old_val > 0 & new_val == 0 ~ NA_real_,
     new_val > 0 & old_val == 0 ~ NA_real_,
     new_val < 0 & old_val < 0 ~ 0,
-    old_val < 0 ~ 1,
-    new_val < 0 ~ -1,
+    old_val < 0 ~ NA_real_,
+    new_val < 0 ~ NA_real_,
     TRUE ~ new_val/old_val - 1
   )
 

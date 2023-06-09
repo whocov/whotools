@@ -2,9 +2,11 @@
 
 export(bin_numbers)
 export(ci_proportion)
+export(convert_country_names)
 export(moving_average)
 export(perc_change)
 export(relabel_who)
+export(scale_y_epicurve)
 export(text_style)
 export(theme_who)
 export(theme_who_gt)

@@ -6,8 +6,6 @@
 \title{ref_country}
 \format{
 A tibble with 238 rows and 4 variables:
-
-A data frame with 238 rows and 4 variables:
 \describe{
 \item{\code{country}}{character the UN name of the country}
 \item{\code{who_region}}{character the WHO region of the country}

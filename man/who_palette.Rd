@@ -6,7 +6,7 @@
 \usage{
 who_palette(
   type = c("qual1", "qual2", "qual3", "qual4", "binary1", "binary2", "who", "region",
-    "change1", "change2"),
+    "change1", "change2", "official"),
   labels = NULL,
   n = Inf
 )

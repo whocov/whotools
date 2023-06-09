@@ -15,7 +15,7 @@
 #' @export
 #'
 who_palette <- function(type = c("qual1", "qual2", "qual3", "qual4", "binary1", "binary2",
-                                 "who", "region", "change1", "change2"),
+                                 "who", "region", "change1", "change2", "official"),
                          labels = NULL,
                          n = Inf) {
 
@@ -41,8 +41,20 @@ who_palette <- function(type = c("qual1", "qual2", "qual3", "qual4", "binary1", 
                  "WPRO"   = "#e5c494",
                  "OTHER"  = "lightgrey"),
     "change1" = suppressWarnings(RColorBrewer::brewer.pal(n, "RdYlBu")),
-    "change2" = suppressWarnings(RColorBrewer::brewer.pal(n, "RdYlGn"))
-  )
+    "change2" = suppressWarnings(RColorBrewer::brewer.pal(n, "RdYlGn")),
+    "offical" = c("Primary" = "#00205C",
+                  "White" = "#FFFFFF",
+                  "Blue" = "#009ADE",
+                  "Orange" = "#F26829",
+                  "Yellow" = "#F4A81D",
+                  "Magenta" = "#A6228C",
+                  "Green" = "#80BC00",
+                  "Purple" = "#5B2C86",
+                  "Black" = "#000000",
+                  "Grey" = "#e6e7e8",
+                  "Red" = "#EF3842")
+
+    )
 
   if (!is.null(labels)) {
     res <- res[length(labels)]
