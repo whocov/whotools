@@ -27,6 +27,7 @@ ci_proportion <- function(k, n,
 
   get_ci <- function(k, n, conf, result) {
     if (is.na(n)) return(NA_integer_)
+    if (n < 0 | k < 0 | k > n) return(NA_integer_)
     if (n == 0) out <- c(0, 1)
     else out <- binom.test(k, n, conf.level = conf)$conf.int
     names(out) <- c("lower", "upper")
