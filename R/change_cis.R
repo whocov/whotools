@@ -51,7 +51,7 @@ ci_change <- function(new_val,
 
   }
 
-  mod <- purrr::map2(old_val, new_val, run_mod)
+  mod <- purrr::map2(new_val, old_val, run_mod)
 
   # out <- purrr::map(mod, ~confint(.x, level = conf)["time",])
   if (output == "pct_change") out <- purrr::map(mod, ~sort(exp(.x) - 1, na.last = TRUE))
