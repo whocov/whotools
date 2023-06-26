@@ -8,7 +8,7 @@ scale_y_epicurve(
   mode = c("cases", "incidence"),
   limits = c(0, NA),
   lower_maximum = 5,
-  expand = expansion(mult = c(0, NA)),
+  expand = expansion(mult = c(0, 0.05)),
   ...
 )
 }
