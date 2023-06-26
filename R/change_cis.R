@@ -37,23 +37,24 @@ ci_change <- function(new_val,
   in_df <- data.frame(x = c(old_val, new_val), time = c(0, 1))
 
   run_mod <- function(nv, ov) {
-    if (NA %in% c(nv, ov)) return(NA_real_)
-    if (0 %in% c(nv, ov)) return(NA_real_)
+    if (NA %in% c(nv, ov)) return(c(NA_real_, NA_real_))
+    if (0 %in% c(nv, ov)) return(c(NA_real_, NA_real_))
 
     df <- data.frame(x = c(ov, nv), time = c(0, 1))
     if (dist == "poisson") {
-      glm(x ~ time, data = df, family = "poisson")
+      mod <- glm(x ~ time, data = df, family = "poisson")
     } else {
-      MASS::glm.nb(x ~ time, data = df, init.theta = theta)
+      mod <- MASS::glm.nb(x ~ time, data = df, init.theta = theta)
     }
+
+    return(confint(mod, level = conf)["time",])
+
   }
 
   mod <- purrr::map2(old_val, new_val, run_mod)
 
-  out <- purrr::map(mod, ~confint(.x, level = conf)["time",])
-
-  if (output == "pct_change") out <- purrr::map(out, ~sort(exp(.x) - 1))
-
+  # out <- purrr::map(mod, ~confint(.x, level = conf)["time",])
+  if (output == "pct_change") out <- purrr::map(mod, ~sort(exp(.x) - 1, na.last = TRUE))
   out <- purrr::map(out, ~purrr::set_names(.x, c("lower", "upper")))
 
   return(out)
