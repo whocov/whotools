@@ -218,6 +218,9 @@ tibble(
 
 ## Reference data
 
+
+### Country dataset
+
 The `ref_country` object contains a reference dataset for all countries. 
 This has official country names, who regions, and iso2 and 3 codes for all countries globally.
 Use this in joins to ensure official country names are used, and to append who region and iso codes to lists of countries. 
@@ -245,4 +248,42 @@ tibble(
   ) %>% 
   mutate(who_region_full = relabel_who(who_region, output = "office", length = "long")) %>% 
   knitr::kable()
+```
+
+
+### Synonyms table
+
+
+The `country_synonyms` object is a table of country synonyms which can be used to convert country name synonyms to their official WHO names. The table is structured as the following, with a simple from and to column strucutre:
+
+
+```{r country_synonyms, echo=FALSE}
+
+knitr::kable(head(country_synonyms))
+
+```
+
+
+This can be used in joins to correct country names, and ultimately join country names to metadata, as in the `ref_country` dataset. A function to automate joining of country names is also included (`convert_country_names()`). This function uses the prepackaged synonym table by default, but can be used with user-supplied reference data as well. It can be used as in the following:
+
+
+```{r convert_country_names}
+
+# dataset with a mix of official and non-official names
+tibble(
+  data_source = c("DRC", "Republic of Congo", "Tanzania", "France", "UK", "Germany",
+                  "Vietnam", "China", "Bolivia", "Brazil")
+) %>% 
+  convert_country_names(country_col = "data_source", 
+                        show_corrections = TRUE, 
+                        ref = country_synonyms,
+                        ref_from_col = "from", 
+                        ref_to_col = "to"
+  ) %>% 
+  left_join(
+    ref_country, c("data_source" = "country")
+  ) %>% 
+  knitr::kable()
+
+
 ```

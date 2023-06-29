@@ -26,9 +26,13 @@ convert_country_names <- function(x,
   match.arg(ref_from_col, choices = colnames(ref))
   match.arg(ref_to_col, choices = colnames(ref))
 
+  ref <- ref %>%
+    dplyr::mutate(from_upper = stringr::str_to_upper(.data[[ref_from_col]])) %>%
+    select(from_upper, any_of(ref_to_col))
+
   x %>%
-    # dplyr::mutate(temp_jc = .data[[country_col]]) %>%
-    dplyr::left_join(ref, by = setNames(ref_from_col, country_col)) %>%
+    dplyr::mutate(cc_upper = stringr::str_to_upper(.data[[country_col]])) %>%
+    dplyr::left_join(ref, by = c("cc_upper" = "from_upper")) %>%
     {
       if (show_corrections) {
         {.} %>%
@@ -38,7 +42,7 @@ convert_country_names <- function(x,
       }
     } %>%
     dplyr::mutate("{country_col}" := dplyr::coalesce(.data[[ref_to_col]], .data[[country_col]])) %>%
-    dplyr::select(-any_of(ref_to_col))
+    dplyr::select(-any_of(ref_to_col), -cc_upper)
 
 
 }

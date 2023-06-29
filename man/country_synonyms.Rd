@@ -8,7 +8,8 @@
 A tibble with 39 rows and 2 variables:
 \describe{
 \item{\code{from}}{character the non-official synonym}
-\item{\code{to}}{character the official country name}
+\item{\code{to_name}}{character the official country name}
+\item{\code{to_iso3}}{character the iso3 code of the country}
 }
 }
 \usage{
