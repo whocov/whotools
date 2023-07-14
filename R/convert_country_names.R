@@ -28,7 +28,7 @@ convert_country_names <- function(x,
 
   ref <- ref %>%
     dplyr::mutate(from_upper = stringr::str_to_upper(.data[[ref_from_col]])) %>%
-    select(from_upper, any_of(ref_to_col))
+    dplyr::select(from_upper, any_of(ref_to_col))
 
   x %>%
     dplyr::mutate(cc_upper = stringr::str_to_upper(.data[[country_col]])) %>%

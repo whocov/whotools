@@ -14,6 +14,9 @@
 #'
 #' @author Henry LS
 #'#'
+#'
+#' @import ggplot2
+#'
 #' @export
 
 
