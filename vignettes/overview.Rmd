@@ -32,60 +32,69 @@ pacman::p_load(tidyverse, lubridate, glue, whotools, gt)
 incidence <- whotools:::incidence
 ```
 
-## Themes
+## Visualisation
+
+### Themes
 
 `whotools` includes a theme that can be added to any ggplot2 object using the
 `theme_who()` function. In the example below we are visualising the daily case
-incidence curve with the WHO theme.
+incidence curve with the WHO theme, also using the `scale_y_epicurve` function
+to generate a y-axis appropriate for daily case data.
 
 ```{r, theme_who}
 incidence %>%
   ggplot(aes(date, cases)) +
   geom_col(width = 1) +
-  scale_y_continuous(expand = expansion(mult = c(0, 0.05))) +
+  scale_y_epicurve("cases") +
   labs(x = "Date", y = "Daily number of cases") +
   theme_who()
 ```
 
-## Palettes
+### Palettes
 
 The `who_palette` function provides a number of palettes that can be applied in
 different scenarios and passed via the `scale_manual` option in ggplot2. In the
-section below, we simulate a gender distribution of cases between different
-places and plot the results using the `binary` palette.
+example below, we visualise the change in urban and non-urban populations in
+Afghanistan over time using the `binary` palette.
 
 ```{r, who_palette_binary}
-## simulate a random gender proportion for different places
-genders <- tibble(
-  prop_male = rbeta(10, 2, 3),
-  prop_female = 1 - prop_male,
-  sample = map(
-    prop_male,
-    ~ sample(c("male", "female"), 100, prob = c(.x, 1-.x), replace = TRUE)
-  ),
-  place = fct_reorder(glue("Place {LETTERS[1:10]}"), prop_male),
-)
+## load world bank population data from {tidyr} package
+data("world_bank_pop", package = "tidyr")
 
-genders %>%
-  pivot_longer(-c(place, sample)) %>%
-  ggplot(aes(place, value, fill = name)) +
+## format data
+world_bank_pop %>%
+  filter(country == "AFG", indicator %in% c("SP.URB.TOTL", "SP.POP.TOTL")) %>%
+  pivot_longer(
+    -c(country, indicator),
+    names_to = "year",
+    values_to = "population"
+  ) %>%
+  pivot_wider(names_from = indicator, values_from = population) %>%
+  transmute(country, year, urban = SP.URB.TOTL, non_urban = SP.POP.TOTL - SP.URB.TOTL) %>%
+  pivot_longer(-c(country, year)) %>%
+  ggplot(aes(year, value/1e6, fill = name)) +
   geom_col(position = "stack") +
   scale_fill_manual(
     ## use binary palette type
     values = who_palette(type = "binary2"),
-    labels = c(prop_female = "Female", prop_male = "Male"),
+    labels = c(urban = "Urban", non_urban = "Non-urban"),
     name = NULL
   ) +
-  scale_y_continuous(
-    expand = expansion(mult = c(0, 0)),
-    labels = scales::percent
+  scale_y_continuous(expand = expansion(mult = c(0, 0))) +
+  guides(fill = guide_legend(reverse = TRUE)) +
+  labs(
+    x = "Year", y = "Population (millions)",
+    title = "Urban and non-urban population growth in Afghanistan"
   ) +
-  labs(x = "Place", y = "Proportion") +
   theme_who() +
-  theme(legend.position = "bottom")
+  theme(
+    legend.position = "bottom",
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  )  
 ```
 
-## Region labels and palettes
+### Region labels and palettes
+
 The `relabel_who` function helps convert regional offices labels between their
 abbreviated and full version (.e.g "EMRO" and "Regional Office for the Eastern
 Mediterranean") and between office and region designations (e.g. EMRO and
@@ -104,6 +113,7 @@ cases_region %>%
   select(-office) %>%
   gt() %>%
   cols_label(cases = "Daily cases per 100,000 population", region = "Region") %>%
+  tab_options(table.font.size = 12) %>%
   theme_who_gt()
 ```
 
@@ -121,7 +131,9 @@ cases_region %>%
   theme_who()
 ```
 
-## Moving averages
+## Methods
+
+### Moving averages
 
 The `moving_average` function calculates a moving average across a specified
 date window. Below we add a line showing the average daily incidence over a
@@ -135,12 +147,12 @@ incidence %>%
   ggplot(aes(x = date)) +
   geom_col(aes(y = cases), width = 1) +
   geom_line(aes(y = cases_weekly), size = 2, color = "black") +
-  scale_y_continuous(expand = expansion(mult = c(0, 0.05))) +
+  scale_y_epicurve("incidence") +
   labs(x = "Date", y = "Daily number of cases") +
   theme_who()
 ```
 
-## Percent changes
+### Percent changes
 
 The `perc_change` function will calculate percent changes. We can use this to
 visualise percent changes in weekly reported cases:
@@ -165,13 +177,25 @@ incidence %>%
   theme_who(strip.placement = "outside")
 ```
 
-## Confidence intervals
+### Confidence intervals
 
-The function `ci_proportion` calculates confidence intervals for proportions. We
-can plot the gender proportion plot above in a different way to include
-confidence intervals using this function. 
+The function `ci_proportion` calculates confidence intervals for proportions. In
+the example below, we simulate a gender distribution of cases between different
+places and plot the gender proportion with confidence intervals.
 
 ```{r, ci_proportion}
+
+## simulate a random gender proportion for different places
+genders <- tibble(
+  prop_male = rbeta(10, 2, 3),
+  prop_female = 1 - prop_male,
+  sample = map(
+    prop_male,
+    ~ sample(c("male", "female"), 100, prob = c(.x, 1-.x), replace = TRUE)
+  ),
+  place = fct_reorder(glue("Place {LETTERS[1:10]}"), prop_male),
+)
+
 genders %>%
   mutate(
     ci = ci_proportion(
@@ -196,7 +220,7 @@ genders %>%
   theme_who()
 ```
 
-## Binning numbers
+### Binning numbers
 
 The `bin_numbers` function does exactly that, with the default binning set to
 WHO age categories. In the example below we bin a simulated distribution of
@@ -218,7 +242,6 @@ tibble(
 
 ## Reference data
 
-
 ### Country dataset
 
 The `ref_country` object contains a reference dataset for all countries. 
@@ -226,11 +249,10 @@ This has official country names, who regions, and iso2 and 3 codes for all count
 Use this in joins to ensure official country names are used, and to append who region and iso codes to lists of countries. 
 
 ```{r ref_country, echo=FALSE}
-
-knitr::kable(head(ref_country))
-
+gt(head(ref_country)) %>%
+  tab_options(table.font.size = 12) %>%
+  theme_who_gt()
 ```
-
 
 <br> 
 <br>
@@ -246,26 +268,23 @@ tibble(
   left_join(
     ref_country, by = c("office_country" = "country")
   ) %>% 
-  mutate(who_region_full = relabel_who(who_region, output = "office", length = "long")) %>% 
-  knitr::kable()
+  mutate(who_region_full = relabel_who(who_region, output = "office", length = "long")) %>%
+  gt() %>%
+  tab_options(table.font.size = 12) %>%
+  theme_who_gt()
 ```
-
-
 ### Synonyms table
-
-
 The `country_synonyms` object is a table of country synonyms which can be used to convert country name synonyms to their official WHO names. The table is structured as the following, with a simple from and to column strucutre:
-
 
 ```{r country_synonyms, echo=FALSE}
 
-knitr::kable(head(country_synonyms))
+gt(head(country_synonyms)) %>%
+  tab_options(table.font.size = 12) %>%
+  theme_who_gt()
 
 ```
 
-
 This can be used in joins to correct country names, and ultimately join country names to metadata, as in the `ref_country` dataset. A function to automate joining of country names is also included (`convert_country_names()`). This function uses the prepackaged synonym table by default, but can be used with user-supplied reference data as well. It can be used as in the following:
-
 
 ```{r convert_country_names}
 
@@ -283,7 +302,8 @@ tibble(
   left_join(
     ref_country, c("data_source" = "country")
   ) %>% 
-  knitr::kable()
-
+  gt() %>%
+  tab_options(table.font.size = 12) %>%
+  theme_who_gt()
 
 ```
