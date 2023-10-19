@@ -44,11 +44,12 @@ bin_numbers <- function(x,
 #' @noRd
 #'
 #' @importFrom stringr str_replace
+#' @importFrom scales comma
 #'
 int_labs <- function(breaks, sep = "-") {
 
-  v1 <- paste0(breaks)
-  v2 <- paste0(dplyr::lead(breaks) - 1)
+  v1 <- paste0(scales::comma(breaks))
+  v2 <- paste0(scales::comma(dplyr::lead(breaks) - 1))
   v2[v1 == v2] <- NA
 
   paste(v1, v2, sep = sep) %>%
