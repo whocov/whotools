@@ -8,7 +8,16 @@
 #'
 #' @export
 #'
-theme_who_gt <- function(x) {
+theme_who_gt <- function(x, mode = c("light", "dark")) {
+
+  mode <- match.arg(mode)
+  mode <- mode[1]
+
+  header_fill <- dplyr::case_when(mode == "light" ~ "#eff3ff",
+                                  mode == "dark" ~ "#00205C")
+
+  header_text <- dplyr::case_when(mode == "light" ~ "black",
+                                  mode == "dark" ~ "white")
 
   x %>%
     tab_style(
@@ -31,15 +40,15 @@ theme_who_gt <- function(x) {
     ) %>%
     tab_style(
       style = list(
-        cell_text(weight = "bold", align = "center", v_align = "middle"),
-        cell_fill(color = "#eff3ff")
+        cell_text(weight = "bold", align = "center", v_align = "middle", color = header_text),
+        cell_fill(color = header_fill)
       ),
       locations = cells_column_labels()
     ) %>%
     tab_style(
       style = list(
-        cell_text(weight = "bold", align = "center", v_align = "middle"),
-        cell_fill(color = "#eff3ff")
+        cell_text(weight = "bold", align = "center", v_align = "middle", color = header_text),
+        cell_fill(color = header_fill)
       ),
       locations = cells_column_spanners()
     ) %>%
