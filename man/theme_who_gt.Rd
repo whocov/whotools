@@ -4,7 +4,7 @@
 \alias{theme_who_gt}
 \title{A general table theme for the \code{{gt}} packag}
 \usage{
-theme_who_gt(x)
+theme_who_gt(x, mode = c("light", "dark"))
 }
 \arguments{
 \item{x}{a gt object}

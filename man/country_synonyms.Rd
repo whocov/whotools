@@ -5,7 +5,7 @@
 \alias{country_synonyms}
 \title{country_synonyms}
 \format{
-A tibble with 39 rows and 2 variables:
+A tibble with 39 rows and 3 variables:
 \describe{
 \item{\code{from}}{character the non-official synonym}
 \item{\code{to_name}}{character the official country name}

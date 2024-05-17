@@ -13,7 +13,7 @@
 
 #' @title country_synonyms
 #' @description synonym table of common country synoyms that are *NOT* WHO official
-#' @format A tibble with 39 rows and 2 variables:
+#' @format A tibble with 39 rows and 3 variables:
 #' \describe{
 #'   \item{\code{from}}{character the non-official synonym}
 #'   \item{\code{to_name}}{character the official country name}
@@ -21,3 +21,21 @@
 
 #'}
 "country_synonyms"
+
+
+
+
+#' @title official_pal
+#' @description table of colours defined according to different schemas in the WHO style guide
+#' @format A tibble with 89 rows and 5 variables:
+#' \describe{
+#'   \item{\code{type}}{type of pallette}
+#'   \item{\code{subtype}}{subtype of pallette}
+#'   \item{\code{tint}}{the degree to which the original colour has been tinted (made lighter)}
+#'   \item{\code{name}}{the name of the assoicated colour}
+#'   \item{\code{hex}}{the hex colour of the associated colour}
+
+
+#'}
+"official_pal"
+
